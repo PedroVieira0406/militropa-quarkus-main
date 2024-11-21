@@ -1,0 +1,118 @@
+@startuml Tabacaria
+'========Produto========='
+class Produto{
+    - id: Long
+    - nome: String
+    - descricao: String
+    - preco: Double
+    - qtdNoEstoque: Integer
+}
+
+class Arma{
+    - marca: String
+    - acabamento: String
+    - calibre: String
+    - comprimentoDoCano: String
+    - capacidadeDeTiro: int
+    - numeroSigma: String
+    - numeroDaArma: String
+    - modelo: String
+    - rna: String
+}
+
+enum TipoArma{
+    REVOLVER,
+    PISTOLA,
+    ESPINGARDA,
+    RIFLE,
+    CARABINA,
+    METRALHADORA,
+    ESCOPETA,
+    FUZIL;
+
+    - id: Integer
+    - label: String
+}
+
+'========Usuario========='
+class Usuario{
+    - id: Long
+    - login: String
+    - senha: String
+}
+
+enum Perfil{
+    USER,
+    ADMIN;
+
+    - id: Integer
+    - label: String
+}
+
+class Funcionario{
+    - nome: String
+    - cpf: String
+    - email: String
+    - matricula: String
+    - telefone: String
+}
+
+class Cliente{
+    - nome: String
+    - cpf: String
+    - email: String
+    - numeroRegistro_posse_porte: String
+    - listaTelefone: List<String>
+}
+'========Venda========='
+class Pedido {
+    - id: Long
+    - data: Date
+    - totalCompra: Double
+}
+
+class ItemPedido {
+    - id: Long
+    - quantidade: Integer
+    - preco: Double
+}
+'========Pagamento========='
+enum FormaDePagamento {
+    CREDITO,
+    DEBITO,
+    PIX;
+
+    - id: Integer
+    - label: String
+}
+'========Endereco========='
+class Endereco {
+    - id: Long
+    - nome: String
+    - logradouro: String
+    - bairro: String
+    - numero: String
+    - complemento: String
+    - cep: String
+    - cidade: String
+    - estado: String
+}
+
+'========Relacionamentos========='
+
+Pedido "1" *--> "1" FormaDePagamento
+Pedido "1" --> "*" ItemPedido
+Pedido "*" o--> "1" Usuario
+
+ItemPedido "*" --> "1" Arma
+
+Usuario "1" *--> "1" Perfil
+Funcionario "1" o--> "1" Usuario
+Funcionario "1" o--> "1" Endereco
+Cliente "1" o--> "*" Endereco
+Cliente "1" o--> "1" Usuario
+
+Arma --|> Produto
+Arma "1" *--> "1" TipoArma
+
+@enduml
