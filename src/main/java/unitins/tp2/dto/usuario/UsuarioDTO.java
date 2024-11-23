@@ -10,7 +10,7 @@ public record UsuarioDTO(
         String login,
         @NotBlank(message = "O campo senha não pode estar em branco")
         String senha,
-        Integer idPerfil
+        Integer perfil
 ) {
         
 }
