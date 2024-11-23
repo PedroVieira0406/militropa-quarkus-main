@@ -6,6 +6,10 @@ import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
 
 public class ImageForm {
+    @FormParam("id")
+    @PartType(MediaType.TEXT_PLAIN)
+    private Lond id;
+    
     @FormParam("nomeImagem")
     @PartType(MediaType.TEXT_PLAIN)
     private String nomeImagem;
