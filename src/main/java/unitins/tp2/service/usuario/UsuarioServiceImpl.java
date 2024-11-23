@@ -42,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setLogin(dto.login());
         novoUsuario.setSenha(hashService.getHashSenha(dto.senha()));
-        novoUsuario.setPerfil(Perfil.valueOf(dto.idPerfil()));
+        novoUsuario.setPerfil(Perfil.valueOf(dto.perfil()));
 
             repository.persist(novoUsuario);
 
@@ -57,7 +57,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setLogin(dto.login());
         String hashSenha = hashService.getHashSenha(dto.senha());
         usuario.setSenha(hashSenha);
-        usuario.setPerfil(Perfil.valueOf(dto.idPerfil()));
+        usuario.setPerfil(Perfil.valueOf(dto.perfil()));
 
         return UsuarioResponseDTO.valueOf(usuario);
     }
