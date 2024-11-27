@@ -16,6 +16,8 @@ public interface ArmaService {
 
     public ArmaResponseDTO updateNomeImagem(Long id, String nomeImagem) ;
 
+    public ArmaResponseDTO salveImage(Long id, String nomeImagem);
+
     public ArmaResponseDTO findById(Long id);
 
     public List<ArmaResponseDTO> findByNome(String nome);

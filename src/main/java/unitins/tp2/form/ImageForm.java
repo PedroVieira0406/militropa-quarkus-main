@@ -33,4 +33,11 @@ public class ImageForm {
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

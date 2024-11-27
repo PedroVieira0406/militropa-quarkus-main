@@ -1,10 +1,14 @@
 package unitins.tp2.service.arma;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 import unitins.tp2.dto.arma.ArmaDTO;
 import unitins.tp2.dto.arma.ArmaResponseDTO;
@@ -16,6 +20,9 @@ import unitins.tp2.repository.ArmaRepository;
 public class ArmaServiceImpl implements ArmaService {
     @Inject
     ArmaRepository repository;
+
+    @Inject
+    Validator validator;
 
     @Override
     @Transactional
@@ -44,6 +51,7 @@ public class ArmaServiceImpl implements ArmaService {
     @Override
     @Transactional
     public ArmaResponseDTO update(ArmaDTO dto, Long id) {
+        validar(dto);
 
         Arma arma = (Arma) repository.findById(id);
         if (arma != null) {
@@ -105,6 +113,25 @@ public class ArmaServiceImpl implements ArmaService {
             .map(e -> ArmaResponseDTO.valueOf(e))
             .toList();
     }
+
+
+    private void validar(ArmaDTO armaDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<ArmaDTO>> violations = validator.validate(armaDTO);
+        if (!violations.isEmpty())
+            throw new ConstraintViolationException(violations);
+
+    }
+
+    @Override
+    @Transactional
+    public ArmaResponseDTO salveImage(Long id, String nomeImagem) {
+
+        Arma entity = repository.findById(id);
+        entity.setNomeImagem(nomeImagem);
+
+        return ArmaResponseDTO.valueOf(entity);
+    }
+
     @Override
     public ArmaResponseDTO updateNomeImagem(Long id, String nomeImagem) {
         Arma arma = repository.findById(id);

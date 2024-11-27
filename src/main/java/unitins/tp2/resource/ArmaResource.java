@@ -25,6 +25,7 @@ import jakarta.ws.rs.core.Response.ResponseBuilder;
 import unitins.tp2.dto.arma.ArmaDTO;
 import unitins.tp2.dto.arma.ArmaResponseDTO;
 import unitins.tp2.form.ImageForm;
+import unitins.tp2.model.Status;
 import unitins.tp2.service.arma.ArmaFileServiceImpl;
 import unitins.tp2.service.arma.ArmaService;
 
@@ -34,7 +35,7 @@ import unitins.tp2.service.arma.ArmaService;
 public class ArmaResource {
 
     @Inject
-    public ArmaFileServiceImpl fileService;
+    ArmaFileServiceImpl fileService;
 
     @Inject
     ArmaService service;
@@ -141,6 +142,20 @@ public class ArmaResource {
             Log.error("Erro ao baixar a imagem: ", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao baixar a imagem.").build();
         }
+    }
+
+    @PATCH
+    @Path("/image/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response salvarImagem(@MultipartForm ImageForm form) {
+
+        try {
+            fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
+            return Response.noContent().build();
+        } catch (IOException e) {
+            return Response.status(Status.CONFLICT).build();
+        }
+
     }
 
     @GET
