@@ -1,6 +1,5 @@
 package unitins.tp2.resource;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -22,10 +21,10 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
+import jakarta.ws.rs.core.Response.Status;
 import unitins.tp2.dto.arma.ArmaDTO;
 import unitins.tp2.dto.arma.ArmaResponseDTO;
 import unitins.tp2.form.ImageForm;
-import unitins.tp2.model.Status;
 import unitins.tp2.service.arma.ArmaFileServiceImpl;
 import unitins.tp2.service.arma.ArmaService;
 
@@ -105,43 +104,13 @@ public class ArmaResource {
         }
     }
 
-    @PATCH
-    @Path("/upload/imagem/{id}")
-//    @RolesAllowed({"Admin"})
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm ImageForm form, @PathParam("id") Long id) {
-        try {
-            Log.info("Salvando imagem para a arma com ID: " + id);
-            String nomeImagem = fileService.salvar(form.getNomeImagem(), form.getImagem());
-            ArmaResponseDTO armaDTO = service.updateNomeImagem(id, nomeImagem);
-            return Response.ok(armaDTO).build();
-        } catch (IOException e) {
-            Log.error("Erro ao salvar a imagem: ", e);
-            return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao salvar a imagem.").build();
-        } catch (Exception e) {
-            Log.error("Erro ao atualizar os dados da imagem: ", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao atualizar os dados da imagem.").build();
-        }
-    }
-
     @GET
-    @Path("/download/imagem/{nomeImagem}")
-//    @RolesAllowed({"User", "Admin"})
+    @Path("/image/download/{nomeImagem}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nomeImagem") String nomeImagem) {
-        try {
-            Log.info("Baixando a imagem: " + nomeImagem);
-            File imagem = fileService.obter(nomeImagem);
-            if (!imagem.exists()) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Imagem não encontrada.").build();
-            }
-            ResponseBuilder response = Response.ok(imagem);
-            response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
-            return response.build();
-        } catch (Exception e) {
-            Log.error("Erro ao baixar a imagem: ", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao baixar a imagem.").build();
-        }
+        ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
+        response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
+        return response.build();
     }
 
     @PATCH
