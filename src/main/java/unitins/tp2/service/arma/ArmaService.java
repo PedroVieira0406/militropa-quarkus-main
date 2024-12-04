@@ -15,6 +15,7 @@ public interface ArmaService {
     public void delete(Long id);
 
     public ArmaResponseDTO updateNomeImagem(Long id, String nomeImagem) ;
+    
 
     public ArmaResponseDTO salveImage(Long id, String nomeImagem);
 
