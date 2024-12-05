@@ -1,7 +1,9 @@
 package unitins.tp2.service.arma;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,8 +14,10 @@ import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 import unitins.tp2.dto.arma.ArmaDTO;
 import unitins.tp2.dto.arma.ArmaResponseDTO;
+import unitins.tp2.model.Acabamento;
 import unitins.tp2.model.Arma;
 import unitins.tp2.model.TipoArma;
+import unitins.tp2.repository.AcabamentoRepository;
 import unitins.tp2.repository.ArmaRepository;
 
 @ApplicationScoped
@@ -23,6 +27,10 @@ public class ArmaServiceImpl implements ArmaService {
 
     @Inject
     Validator validator;
+    
+    @Inject
+    AcabamentoRepository acabamentoRepository;
+
 
     @Override
     @Transactional
@@ -33,7 +41,7 @@ public class ArmaServiceImpl implements ArmaService {
             novaArma.setPreco(dto.getPreco());
             novaArma.setQtdNoEstoque(dto.getQtdNoEstoque());
             novaArma.setTipo(TipoArma.valueOf(dto.getTipo()));
-            novaArma.setAcabamento(dto.getAcabamento());
+            novaArma.setListaAcabamento(acharAcabamentos(dto.getIdsAcabamentos()));
             novaArma.setCalibre(dto.getCalibre());
             novaArma.setCapacidadeDeTiro(dto.getCapacidadeDeTiro());
             novaArma.setComprimentoDoCano(dto.getComprimentoDoCano());
@@ -60,7 +68,8 @@ public class ArmaServiceImpl implements ArmaService {
             arma.setPreco(dto.getPreco());
             arma.setQtdNoEstoque(dto.getQtdNoEstoque());
             arma.setTipo(TipoArma.valueOf(dto.getTipo()));
-            arma.setAcabamento(dto.getAcabamento());
+            arma.getListaAcabamento().clear();
+            arma.setListaAcabamento(acharAcabamentos(dto.getIdsAcabamentos()));
             arma.setCalibre(dto.getCalibre());
             arma.setCapacidadeDeTiro(dto.getCapacidadeDeTiro());
             arma.setComprimentoDoCano(dto.getComprimentoDoCano());
@@ -90,6 +99,21 @@ public class ArmaServiceImpl implements ArmaService {
         else{
             throw new NotFoundException("Arma não encontrada para o ID: " + id);
         }
+    }
+
+    private Acabamento acharAcabamento(long idAcabamento) {
+        Acabamento acabamento = acabamentoRepository.findById(idAcabamento);
+        if (acabamento == null) {
+            throw new NotFoundException("Acabamento não encontrada.");
+        }
+        return acabamento;
+    }
+
+    private List<Acabamento> acharAcabamentos(List<Long> idsAcabamentos) {
+        return idsAcabamentos.stream()
+            .map(this::acharAcabamento)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
     }
 
     @Override

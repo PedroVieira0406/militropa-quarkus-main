@@ -6,10 +6,10 @@ import unitins.tp2.model.Acabamento;
 
 public record AcabamentoDTO(
         @NotBlank(message = "insira o nome corretamente")
-        String material
+        String nome
         ) {
     public static AcabamentoDTO valueOf(Acabamento acabamento) {
         return new AcabamentoDTO(
-            acabamento.getMaterial());
+            acabamento.getNome());
     }
 }

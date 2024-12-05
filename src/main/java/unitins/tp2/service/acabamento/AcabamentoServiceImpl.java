@@ -21,7 +21,7 @@ public class AcabamentoServiceImpl implements AcabamentoService {
     @Override
     public AcabamentoResponseDTO insert(AcabamentoDTO dto) {
         Acabamento novoAcabamento = new Acabamento();
-        novoAcabamento.setMaterial(dto.material());
+        novoAcabamento.setNome(dto.nome());
         repository.persist(novoAcabamento);
         return AcabamentoResponseDTO.valueOf(novoAcabamento);
     }
@@ -31,8 +31,8 @@ public class AcabamentoServiceImpl implements AcabamentoService {
     public AcabamentoResponseDTO update(AcabamentoDTO dto, Long id) {
         Acabamento acabamento = repository.findById(id);
         if (acabamento != null) {
-            acabamento.setMaterial(dto.material());;
-           
+            acabamento.setNome(dto.nome());;
+
         } else
             throw new NotFoundException();
 

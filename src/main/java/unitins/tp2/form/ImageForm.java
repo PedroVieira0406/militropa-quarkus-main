@@ -1,4 +1,4 @@
-package br.unitins.tp2.form;
+package unitins.tp2.form;
 
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 

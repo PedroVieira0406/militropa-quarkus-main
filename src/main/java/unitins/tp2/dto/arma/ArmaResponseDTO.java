@@ -1,5 +1,8 @@
 package unitins.tp2.dto.arma;
 
+import java.util.List;
+
+import unitins.tp2.dto.acabamento.AcabamentoResponseDTO;
 import unitins.tp2.model.Arma;
 import unitins.tp2.model.TipoArma;
 
@@ -11,7 +14,6 @@ public record ArmaResponseDTO(
     int qtdNoEstoque,
     TipoArma tipo,
     String marca,
-    String acabamento,
     String calibre,
     String comprimentoDoCano,
     int capacidadeDeTiro,
@@ -19,9 +21,16 @@ public record ArmaResponseDTO(
     String numeroDaArma,
     String modelo,
     String rna,
-    String nomeImagem
+    String nomeImagem,
+    List<AcabamentoResponseDTO> acabamento
     ){
         public static ArmaResponseDTO valueOf(Arma arma){
+
+            List<AcabamentoResponseDTO> listaAcabamento = arma.getListaAcabamento()
+                                                .stream()
+                                                .map(AcabamentoResponseDTO:: valueOf)
+                                                .toList();
+
             return new ArmaResponseDTO(
                 arma.getId(),
                 arma.getNome(),
@@ -30,7 +39,6 @@ public record ArmaResponseDTO(
                 arma.getQtdNoEstoque(),
                 arma.getTipo(),
                 arma.getMarca(),
-                arma.getAcabamento(),
                 arma.getCalibre(),
                 arma.getComprimentoDoCano(),
                 arma.getCapacidadeDeTiro(),
@@ -38,6 +46,7 @@ public record ArmaResponseDTO(
                 arma.getNumeroDaArma(),
                 arma.getModelo(),
                 arma.getRna(),
-                arma.getNomeImagem());                  
+                arma.getNomeImagem(),
+                listaAcabamento);                  
     }
 }

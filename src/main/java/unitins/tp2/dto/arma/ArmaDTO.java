@@ -1,5 +1,7 @@
 package unitins.tp2.dto.arma;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
@@ -14,8 +16,8 @@ public class ArmaDTO extends ProdutoDTO {
     int tipo;
     @NotBlank(message = "insira o 'marca' corretamente")
     String marca;
-    @NotBlank(message = "insira o 'acabamento' corretamente")
-    String acabamento;
+    @NotNull(message = "Os ids das acabamentos devem ser informados.")
+    List<Long> idsAcabamentos;
     @NotBlank(message = "insira o 'calibre' corretamente")
     String calibre;
     @NotBlank(message = "insira o 'comprimento do cano' corretamente")
@@ -36,7 +38,7 @@ public class ArmaDTO extends ProdutoDTO {
             @NotBlank(message = "insira a descrição corretamente") String descricao,
             @NotNull(message = "insira o tipo de arma corretamente") int tipo,
             @NotBlank(message = "insira o 'marca' corretamente") String marca,
-            @NotBlank(message = "insira o 'acabamento' corretamente") String acabamento,
+            @NotBlank(message = "insira o 'acabamento' corretamente") List<Long> idsAcabamentos,
             @NotBlank(message = "insira o 'calibre' corretamente") String calibre,
             @NotBlank(message = "insira o 'comprimento do cano' corretamente") String comprimentoDoCano,
             @NotNull(message = "insira o 'capacidade de tiro' corretamente") int capacidadeDeTiro,
@@ -46,7 +48,7 @@ public class ArmaDTO extends ProdutoDTO {
         super(nome, qtdNoEstoque, preco, descricao);
         this.tipo = tipo;
         this.marca = marca;
-        this.acabamento = acabamento;
+        this.idsAcabamentos = idsAcabamentos;
         this.calibre = calibre;
         this.comprimentoDoCano = comprimentoDoCano;
         this.capacidadeDeTiro = capacidadeDeTiro;

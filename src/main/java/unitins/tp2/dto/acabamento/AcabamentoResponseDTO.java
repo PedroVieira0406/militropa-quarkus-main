@@ -4,13 +4,13 @@ import unitins.tp2.model.Acabamento;
 
 public record AcabamentoResponseDTO(
                 Long id,
-                String material
+                String nome
                 
 ) {
         public static AcabamentoResponseDTO valueOf(Acabamento acabamento) {
                 return new AcabamentoResponseDTO(
                                 acabamento.getId(),
-                                acabamento.getMaterial()
+                                acabamento.getNome()
                                 );
         }
 }

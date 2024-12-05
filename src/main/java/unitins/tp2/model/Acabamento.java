@@ -11,6 +11,6 @@ import lombok.Setter;
 public class Acabamento extends DefaultEntity {
     
     @Column(length = 60)
-    private String material;
+    private String nome;
     
 }

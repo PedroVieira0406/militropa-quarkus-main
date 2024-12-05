@@ -1,7 +1,12 @@
 package unitins.tp2.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +16,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "arma")
 public class Arma extends Produto{
+
+
     @Column(name="tipo_arma")
     private TipoArma tipo;
     @Column(length = 60)
     private String marca;
-    @Column(length = 60)
-    private String acabamento;
     @Column
     private String calibre;
     @Column(length = 60)
@@ -34,5 +39,12 @@ public class Arma extends Produto{
     private String rna;
 
     private String nomeImagem;
+
+    @ManyToMany
+    @JoinTable (name="arma_acabamento",
+    joinColumns= @JoinColumn(name="id_arma"),
+    inverseJoinColumns = @JoinColumn(name="id_acabamento") )
+    private List<Acabamento> listaAcabamento;
+
 
 }
