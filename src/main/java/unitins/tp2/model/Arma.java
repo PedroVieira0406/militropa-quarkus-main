@@ -34,12 +34,10 @@ public class Arma extends Produto{
     private String numeroDaArma;
     @Column(length = 60)
     private String modelo;
-    
     @Column(name="registro_nacional_armas")
     private String rna;
-
+    @Column
     private String nomeImagem;
-
     @ManyToMany
     @JoinTable (name="arma_acabamento",
     joinColumns= @JoinColumn(name="id_arma"),
