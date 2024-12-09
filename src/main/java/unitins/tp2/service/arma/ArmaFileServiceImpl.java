@@ -20,7 +20,7 @@ import unitins.tp2.service.file.FileService;
 public class ArmaFileServiceImpl implements FileService {
     // ex. /user/janio/quarkus/images/usuario/
     private final String PATH_USER = System.getProperty("user.home")    
-        + File.separator + "quarkus"
+        + File.separator + ".quarkus"
         + File.separator + "images"
         + File.separator + "arma" + File.separator;
 

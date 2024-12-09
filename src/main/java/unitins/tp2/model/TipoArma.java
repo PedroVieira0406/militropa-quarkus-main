@@ -12,10 +12,9 @@ public enum TipoArma {
     PISTOLA(2, "Pistola"),
     ESPINGARDA(3, "Espingarda"),
     RIFLE(4, "Rifle"),
-    CARABINA(5, "Carabina"),
-    METRALHADORA(6, "Metralhadora"),
-    ESCOPETA(7, "Escopeta"),
-    FUZIL(8, "Fuzil");
+    METRALHADORA(5, "Metralhadora"),
+    ESCOPETA(6, "Escopeta"),
+    FUZIL(7, "Fuzil");
 
     private final Integer id;
     private final String label;
