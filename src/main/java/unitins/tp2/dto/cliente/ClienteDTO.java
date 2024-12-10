@@ -17,7 +17,7 @@ public record ClienteDTO(
         @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email inválido")
         String email,
         @NotBlank(message = "O campo 'Numero de Registro de Posse ou Porte' não pode estar em branco")
-        String numeroRegistro_posse_porte,
+        String registro,
         @NotNull(message = "O campo telefone não pode ficar em branco")
         List<String> listaTelefones,
         @NotNull(message = "O campo enderecos não pode ficar em branco")
