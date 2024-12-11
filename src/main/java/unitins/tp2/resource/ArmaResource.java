@@ -25,6 +25,7 @@ import jakarta.ws.rs.core.Response.Status;
 import unitins.tp2.dto.arma.ArmaDTO;
 import unitins.tp2.dto.arma.ArmaResponseDTO;
 import unitins.tp2.form.ImageForm;
+import unitins.tp2.model.TipoArma;
 import unitins.tp2.service.arma.ArmaFileServiceImpl;
 import unitins.tp2.service.arma.ArmaService;
 
@@ -146,5 +147,11 @@ public class ArmaResource {
     @Path("/count/search/{nome}")
     public Response countByNome(@PathParam("nome") String nome) {
         return Response.ok(service.countByNome(nome)).build();
+    }
+
+    @GET
+    @Path("/tipoArmas")
+    public Response getTipoArma() {
+        return Response.ok(TipoArma.values()).build();
     }
 }

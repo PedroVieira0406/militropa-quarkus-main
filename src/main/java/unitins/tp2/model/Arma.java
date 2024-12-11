@@ -18,8 +18,8 @@ import lombok.Setter;
 public class Arma extends Produto{
 
 
-    @Column(name="tipo_arma")
-    private TipoArma tipo;
+    @Column
+    private TipoArma tipoArma;
     @Column(length = 60)
     private String marca;
     @Column

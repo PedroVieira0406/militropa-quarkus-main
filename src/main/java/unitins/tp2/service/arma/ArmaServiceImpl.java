@@ -40,7 +40,7 @@ public class ArmaServiceImpl implements ArmaService {
             novaArma.setDescricao(dto.getDescricao());
             novaArma.setPreco(dto.getPreco());
             novaArma.setQtdNoEstoque(dto.getQtdNoEstoque());
-            novaArma.setTipo(TipoArma.valueOf(dto.getTipo()));
+            novaArma.setTipoArma(TipoArma.valueOf(dto.getTipoArma()));
             novaArma.setListaAcabamento(acharAcabamentos(dto.getIdsAcabamentos()));
             novaArma.setCalibre(dto.getCalibre());
             novaArma.setCapacidadeDeTiro(dto.getCapacidadeDeTiro());
@@ -67,7 +67,7 @@ public class ArmaServiceImpl implements ArmaService {
             arma.setDescricao(dto.getDescricao());
             arma.setPreco(dto.getPreco());
             arma.setQtdNoEstoque(dto.getQtdNoEstoque());
-            arma.setTipo(TipoArma.valueOf(dto.getTipo()));
+            arma.setTipoArma(TipoArma.valueOf(dto.getTipoArma()));
             arma.getListaAcabamento().clear();
             arma.setListaAcabamento(acharAcabamentos(dto.getIdsAcabamentos()));
             arma.setCalibre(dto.getCalibre());

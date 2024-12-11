@@ -12,7 +12,7 @@ public record ArmaResponseDTO(
     String descricao,
     Double preco,
     int qtdNoEstoque,
-    TipoArma tipo,
+    TipoArma tipoArma,
     String marca,
     String calibre,
     String comprimentoDoCano,
@@ -22,7 +22,7 @@ public record ArmaResponseDTO(
     String modelo,
     String rna,
     String nomeImagem,
-    List<AcabamentoResponseDTO> acabamento
+    List<AcabamentoResponseDTO> listaAcabamento
     ){
         public static ArmaResponseDTO valueOf(Arma arma){
 
@@ -37,7 +37,7 @@ public record ArmaResponseDTO(
                 arma.getDescricao(),
                 arma.getPreco(),
                 arma.getQtdNoEstoque(),
-                arma.getTipo(),
+                arma.getTipoArma(),
                 arma.getMarca(),
                 arma.getCalibre(),
                 arma.getComprimentoDoCano(),
@@ -47,6 +47,6 @@ public record ArmaResponseDTO(
                 arma.getModelo(),
                 arma.getRna(),
                 arma.getNomeImagem(),
-                listaAcabamento);                  
+                listaAcabamento);
     }
 }

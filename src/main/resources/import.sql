@@ -43,7 +43,7 @@ VALUES
     ('9012345678', '999.999.999-99', 'Fernanda', 'fernanda@example.com', '{"1234567898", "9876543218"}');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     (15, 2000.00, 30, 1, 'Smith & Wesson Model 686', 'SW686-001', '6"', 'Smith & Wesson', 'Revólver .357 Magnum', 'Um revólver clássico, conhecido por sua confiabilidade e precisão.', '.357 Magnum', 'SW001', 'RN001','Smith_e_Wesson.png'),
@@ -56,7 +56,7 @@ VALUES
     (6, 1000.00, 18, 1, 'Smith & Wesson Model 637', 'SW637-008', '4"', 'Smith & Wesson', 'Revólver .38 Special', 'Um revólver compacto, ideal para uso como arma de backup ou defesa pessoal.', '.38 Special', 'SW002', 'RN008','Smith_E_Wesson_Model_637.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
 
@@ -73,7 +73,7 @@ VALUES
     (6, 1550.00, 20, 1, 'Taurus Tracker', 'TRACKER-010', '5"', 'Taurus', 'Revólver Taurus Tracker', 'Popular por seu conforto e controle.', '.357 Magnum', 'TRS010', 'RN018', 'Taurus_Tracker.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     -- Pistolas
@@ -89,7 +89,7 @@ VALUES
     (12, 1500.00, 12, 2, 'Colt M1911', 'M1911-010', '5"', 'Colt', 'Pistola Colt M1911', 'Clássica e icônica em calibre .45 ACP.', '.45 ACP', 'COLT010', 'RN028', 'Colt_M1911.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     -- Rifles
@@ -105,7 +105,7 @@ VALUES
     (22, 1600.00, 20, 4, 'Marlin 336', 'MAR336-010', '20"', 'Marlin', 'Rifle Marlin 336', 'Clássico para caçadas de cervos.', '.30-30 Winchester', 'MAR010', 'RN038', 'Marlin_336.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     -- Escopetas
@@ -121,7 +121,7 @@ VALUES
     (6, 1500.00, 16, 6, 'Maverick 88', 'MAV88-010', '18.5"', 'Mossberg', 'Escopeta Maverick 88', 'Econômica e confiável.', '12 Gauge', 'MAV010', 'RN058', 'Maverick_88.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     -- Fuzis
@@ -137,7 +137,7 @@ VALUES
     (20, 5000.00, 4, 7, 'FN FAL', 'FAL-010', '21"', 'FN Herstal', 'Fuzil FN FAL', 'Clássico usado em forças armadas globais.', '7.62x51mm NATO', 'FN010', 'RN068', 'FN_FAL.png');
 
 INSERT INTO arma(
-	capacidadedetiro, preco, qtdnoestoque, tipo_arma, modelo, numerosigma, comprimentodocano,
+	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
     -- Metralhadoras
@@ -180,7 +180,9 @@ VALUES
 -- senha_funcionario_daniel
     (2, 'funcionario_daniel', 'gz92jkTcveMCL5phxX4m8vcDbE7IwdfMYLEbCFjsd55e89YZ8XlOte2oYZKk9l+UgIR94tyzIt1wyI22/K1sdg=='),
 -- senha_funcionario_jacare
-    (2, 'funcionario_jacare', '/1TvZJJL/8eyuJ8ktCm35K2ShjAQYM9dPzdDUwU8Fk2S5UMQlZ+AJI6ruk/VRwEB+6LISFzdAOVVQvhl0Owc3w==');
+    (2, 'funcionario_jacare', '/1TvZJJL/8eyuJ8ktCm35K2ShjAQYM9dPzdDUwU8Fk2S5UMQlZ+AJI6ruk/VRwEB+6LISFzdAOVVQvhl0Owc3w=='),
+--Vuasi666
+    (2, 'Vuasi666', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ==');
 
 
 INSERT INTO cliente_usuario (id_cliente, id_usuario)
