@@ -46,6 +46,7 @@ INSERT INTO arma(
 	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
     marca, nome, descricao, calibre, numerodaarma, registro_nacional_armas, nomeImagem)
 VALUES
+
     (15, 2000.00, 30, 1, 'Smith & Wesson Model 686', 'SW686-001', '6"', 'Smith & Wesson', 'Revólver .357 Magnum', 'Um revólver clássico, conhecido por sua confiabilidade e precisão.', '.357 Magnum', 'SW001', 'RN001','Smith_e_Wesson.png'),
     (30, 1500.00, 20, 4, 'Colt AR-15', 'COLTAR15-002', '16"', 'Colt', 'Rifle AR-15', 'Um rifle semiautomático, amplamente utilizado para esportes de tiro e caça.', '5.56mm', 'COLT002', 'RN002','coltAr.png'),
     (8, 800.00, 25, 2, 'Glock 19', 'GLOCK19-003', '4"', 'Glock', 'Pistola Glock 19', 'Uma pistola compacta, popular entre forças policiais e civis.', '9mm', 'GLK003', 'RN003','glock19.png'),

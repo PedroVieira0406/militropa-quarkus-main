@@ -36,7 +36,6 @@ public class Arma extends Produto{
     private String modelo;
     @Column(name="registro_nacional_armas")
     private String rna;
-    @Column
     private String nomeImagem;
     @ManyToMany
     @JoinTable (name="arma_acabamento",

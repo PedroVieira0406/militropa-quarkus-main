@@ -19,7 +19,7 @@ public class Produto extends DefaultEntity{
     @Column(length = 15)
     private Double preco;
 
-    @Column(length = 60)
+    @Column(length = 400)
     private String descricao;
 
 }
