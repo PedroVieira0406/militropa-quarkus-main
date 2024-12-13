@@ -10,6 +10,7 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import unitins.tp2.dto.cliente.ClienteDTO;
+import unitins.tp2.dto.cliente.ClienteResponseDTO;
 import unitins.tp2.dto.endereco.EnderecoDTO;
 import unitins.tp2.service.cliente.ClienteService;
 import unitins.tp2.service.endereco.EnderecoServiceImpl;
@@ -36,6 +38,19 @@ public class ClienteResource {
 
     @Inject
     JsonWebToken jwt;
+
+    @POST
+//    @RolesAllowed({"Admin"})
+    public Response insert(ClienteDTO dto) {
+        try {
+            Log.info("Cadastrando uma cliente: " + dto.nome());
+            ClienteResponseDTO responseDTO = service.insert(dto);
+            return Response.status(Response.Status.CREATED).entity(responseDTO).build();
+        } catch (Exception e) {
+            Log.error("Erro ao cadastrar uma cliente: ", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao cadastrar a cliente.").build();
+        }
+    }
 
     @PUT
     @Transactional

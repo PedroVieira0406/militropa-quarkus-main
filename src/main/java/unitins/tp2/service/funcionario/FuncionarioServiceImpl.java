@@ -37,9 +37,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         insertFuncionario.setMatricula(dto.matricula());
         insertFuncionario.setTelefone(dto.telefone());
 
-        Endereco endereco = enderecoRepository.findById(dto.idEndereco());
+        Endereco endereco = enderecoRepository.findById(dto.endereco());
         insertFuncionario.setEndereco(endereco);
-        Usuario usuario = usuarioRepository.findById(dto.idUsuario());
+        Usuario usuario = usuarioRepository.findById(dto.usuario());
         insertFuncionario.setUsuario(usuario);
 
         repository.persist(insertFuncionario);
@@ -60,9 +60,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
             funcionarioUpdate.setMatricula(dto.matricula());
             funcionarioUpdate.setTelefone(dto.telefone());
 
-            Endereco endereco = enderecoRepository.findById(dto.idEndereco());
+            Endereco endereco = enderecoRepository.findById(dto.endereco());
             funcionarioUpdate.setEndereco(endereco);
-            Usuario usuario = usuarioRepository.findById(dto.idUsuario());
+            Usuario usuario = usuarioRepository.findById(dto.usuario());
             funcionarioUpdate.setUsuario(usuario);
 
             repository.persist(funcionarioUpdate);

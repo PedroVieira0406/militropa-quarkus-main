@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -29,6 +30,20 @@ public class EnderecoResource {
     @Inject
     JsonWebToken jwt;
 
+
+    @POST
+    @Transactional
+//    @RolesAllowed({"Admin"})
+    public Response insert(EnderecoDTO dto) {
+        try {
+            Log.info("Cadastrando uma endereco: " + dto.nome());
+            EnderecoResponseDTO responseDTO = service.insert(dto);
+            return Response.status(Response.Status.CREATED).entity(responseDTO).build();
+        } catch (Exception e) {
+            Log.error("Erro ao cadastrar uma endereco: ", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao cadastrar a endereco.").build();
+        }
+    }
     @PUT
     @Transactional
     @Path("/{id}")

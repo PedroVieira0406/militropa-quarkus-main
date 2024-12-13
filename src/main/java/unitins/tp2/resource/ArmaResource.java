@@ -41,6 +41,7 @@ public class ArmaResource {
     ArmaService service;
 
     
+    @Transactional
     @POST
 //    @RolesAllowed({"Admin"})
     public Response insert(ArmaDTO dto) {
