@@ -15,6 +15,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import unitins.tp2.dto.endereco.EnderecoDTO;
 import unitins.tp2.dto.endereco.EnderecoResponseDTO;
 import unitins.tp2.service.endereco.EnderecoService;
@@ -32,18 +33,15 @@ public class EnderecoResource {
 
 
     @POST
-    @Transactional
-//    @RolesAllowed({"Admin"})
     public Response insert(EnderecoDTO dto) {
-        try {
-            Log.info("Cadastrando uma endereco: " + dto.nome());
-            EnderecoResponseDTO responseDTO = service.insert(dto);
-            return Response.status(Response.Status.CREATED).entity(responseDTO).build();
-        } catch (Exception e) {
-            Log.error("Erro ao cadastrar uma endereco: ", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao cadastrar a endereco.").build();
-        }
+        Log.infof("Inserindo um endereco: %s", dto.nome());
+
+        EnderecoResponseDTO endereco = service.insert(dto);
+        Log.infof("Endereco (%d) criado com sucesso.", endereco.id());
+        return Response.status(Status.CREATED).entity(endereco).build();
+
     }
+
     @PUT
     @Transactional
     @Path("/{id}")

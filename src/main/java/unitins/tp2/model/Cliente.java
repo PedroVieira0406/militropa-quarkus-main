@@ -2,15 +2,15 @@ package unitins.tp2.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -33,11 +33,7 @@ public class Cliente extends DefaultEntity {
     private List<String> listaTelefones;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-        name = "cliente_endereco",
-         joinColumns = @JoinColumn(name = "id_cliente"),
-          inverseJoinColumns = @JoinColumn(name = "id_endereco")
-    )
+    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "id_cliente"), inverseJoinColumns = @JoinColumn(name = "id_endereco"))
     private List<Endereco> listaEnderecos;
 
     @OneToOne

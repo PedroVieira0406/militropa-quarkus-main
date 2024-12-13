@@ -22,7 +22,8 @@ public class EnderecoServiceImpl implements EnderecoService {
     ClienteRepository clienteRepository;
 
     @Override
-    public EnderecoResponseDTO insert(EnderecoDTO dto) {
+    @Transactional
+    public EnderecoResponseDTO insert( EnderecoDTO dto) {
         Endereco novoEndereco = new Endereco();
         novoEndereco.setNome(dto.nome());
         novoEndereco.setEstado(dto.estado());

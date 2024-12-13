@@ -16,7 +16,7 @@ public class Endereco extends DefaultEntity {
     private String logradouro;
     @Column(length = 5)
     private String numero;
-    @Column(length = 500)
+    @Column(length = 50)
     private String complemento;
     @Column(length = 120)
     private String bairro;

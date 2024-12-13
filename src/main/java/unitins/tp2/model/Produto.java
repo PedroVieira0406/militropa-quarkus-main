@@ -13,13 +13,13 @@ public class Produto extends DefaultEntity{
     @Column(length = 60)
     private String nome;
 
-    @Column(length = 60)
+    @Column(length = 6)
     private int qtdNoEstoque;
 
-    @Column(length = 60)
+    @Column(length = 15)
     private Double preco;
 
-    @Column(length = 400)
+    @Column(length = 60)
     private String descricao;
 
 }
