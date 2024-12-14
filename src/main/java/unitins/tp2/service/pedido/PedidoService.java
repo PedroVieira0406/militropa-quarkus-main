@@ -14,7 +14,6 @@ public interface PedidoService {
         public List<PedidoResponseDTO> findByCliente(Long idCliente);
         public void delete(Long id);
         public void alterarStatusPagamento(Long id);
-    
         public List<PedidoResponseDTO> meusPedidos();
 
         public long count();

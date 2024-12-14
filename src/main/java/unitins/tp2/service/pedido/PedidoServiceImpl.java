@@ -53,7 +53,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         pedido.setDataHora(LocalDateTime.now());
         pedido.setCliente(cliente);
-        pedido.setFormaDePagamento(FormaDePagamento.valueOf(dto.idFormaDePagamento()));
+        pedido.setFormaDePagamento(FormaDePagamento.valueOf(dto.formaDePagamento()));
 
         List<ItemPedido> itens = new ArrayList<ItemPedido>();
         double total = 0;
@@ -71,7 +71,7 @@ public class PedidoServiceImpl implements PedidoService {
             }
 
             total += calcularValorTotal(item.getArma(), item);
-            
+
             itens.add(item);
         }
 
@@ -98,17 +98,17 @@ public class PedidoServiceImpl implements PedidoService {
         return null;
     }
 
-@Override
+    @Override
     public List<PedidoResponseDTO> findAll(int page, int pageSize) {
         List<Pedido> lista = pedidoRepository
-                                    .findAll()
-                                    .page(page, pageSize)
-                                    .list();
+                .findAll()
+                .page(page, pageSize)
+                .list();
 
         return lista
-            .stream()
-            .map(e -> PedidoResponseDTO.valueOf(e))
-            .toList();
+                .stream()
+                .map(e -> PedidoResponseDTO.valueOf(e))
+                .toList();
     }
 
     @Override
@@ -160,11 +160,11 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidoRepository.count();
     }
 
-        @Override
+    @Override
     @Transactional
     public void delete(Long id) {
-        if (!pedidoRepository.deleteById(id)) 
-        throw new NotFoundException("Arma não encontrada para o ID: " + id);
+        if (!pedidoRepository.deleteById(id))
+            throw new NotFoundException("Arma não encontrada para o ID: " + id);
     }
 
 }
