@@ -183,7 +183,9 @@ VALUES
 -- senha_funcionario_jacare
     (2, 'funcionario_jacare', '/1TvZJJL/8eyuJ8ktCm35K2ShjAQYM9dPzdDUwU8Fk2S5UMQlZ+AJI6ruk/VRwEB+6LISFzdAOVVQvhl0Owc3w=='),
 --Vuasi666
-    (2, 'Vuasi666', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ==');
+    (2, 'Vuasi666', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ=='),
+--Vuasi999
+    (1, 'Vuasi999', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ==');
 
 
 INSERT INTO cliente_usuario (id_cliente, id_usuario)

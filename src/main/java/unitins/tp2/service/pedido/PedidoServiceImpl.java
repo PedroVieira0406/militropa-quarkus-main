@@ -11,6 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.NotFoundException;
 import unitins.tp2.dto.itemPedido.ItemPedidoDTO;
 import unitins.tp2.dto.pedido.PedidoDTO;
 import unitins.tp2.dto.pedido.PedidoResponseDTO;
@@ -157,6 +158,13 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public long count() {
         return pedidoRepository.count();
+    }
+
+        @Override
+    @Transactional
+    public void delete(Long id) {
+        if (!pedidoRepository.deleteById(id)) 
+        throw new NotFoundException("Arma não encontrada para o ID: " + id);
     }
 
 }

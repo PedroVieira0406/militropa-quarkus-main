@@ -26,4 +26,4 @@ public record ClienteDTO(
         String login,
         @NotNull(message = "O campo senha não pode ficar em branco")
         String senha)
-        {}
+        {}      
