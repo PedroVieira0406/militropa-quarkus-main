@@ -1,6 +1,5 @@
 package unitins.tp2.service.cliente;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
@@ -12,8 +11,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
-import unitins.tp2.dto.endereco.EnderecoDTO;
-import unitins.tp2.dto.endereco.EnderecoResponseDTO;
 import unitins.tp2.model.Cliente;
 import unitins.tp2.model.Endereco;
 import unitins.tp2.model.Perfil;
@@ -57,35 +54,23 @@ public class ClienteServiceImpl implements ClienteService {
         novoCliente.setCpf(dto.cpf());
         novoCliente.setEmail(dto.email());
         novoCliente.setNumeroRegistro_posse_porte(dto.registro());
-        if (dto.listaEnderecos() != null &&
-                !dto.listaEnderecos().isEmpty()) {
-            novoCliente.setListaEnderecos(new ArrayList<Endereco>());
-            for (EnderecoDTO end : dto.listaEnderecos()) {
-                Endereco endereco = new Endereco();
-                endereco.setNome(end.nome());
-                endereco.setLogradouro(end.logradouro());
-                endereco.setNumero(end.numero());
-                endereco.setBairro(end.bairro());
-                endereco.setComplemento(end.complemento());
-                endereco.setCidade(end.cidade());
-                endereco.setEstado(end.estado());
-                novoCliente.getListaEnderecos().add(endereco);
-            }
-        }
 
-        if (dto.listaTelefones() != null &&
-                !dto.listaTelefones().isEmpty()) {
-            novoCliente.setListaTelefones(new ArrayList<String>());
-            for (String telefone : dto.listaTelefones()) {
-                novoCliente.getListaTelefones().add(telefone);
-            }
-        }
+        Endereco endereco = new Endereco();
+        endereco.setNome(dto.enderecoNome());
+        endereco.setLogradouro(dto.enderecoLogradouro());
+        endereco.setNumero(dto.enderecoNumero());
+        endereco.setBairro(dto.enderecoBairro());
+        endereco.setCep(dto.enderecoCep());
+        endereco.setComplemento(dto.enderecoComplemento());
+        endereco.setCidade(dto.enderecoCidade());
+        endereco.setEstado(dto.enderecoEstado());
+        novoCliente.setEndereco(endereco);
 
         Usuario usuario = new Usuario();
         usuario.setLogin(dto.login());
         usuario.setSenha(hashService.getHashSenha(dto.senha()));
         usuario.setPerfil(Perfil.USER);
-        
+
         usuarioRepository.persist(usuario);
         novoCliente.setUsuario(usuario);
 
@@ -97,30 +82,19 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public ClienteResponseDTO update(ClienteDTO dto, Long id) {
-        
         Cliente clienteUpdate = clienteRepository.findById(id);
         if (clienteUpdate == null) {
             throw new NotFoundException("Cliente não encontrado");
         }
 
-        Usuario usuario = clienteUpdate.getUsuario();
-        clienteUpdate.setUsuario(usuario);
+        // Atualizando os campos do cliente
+        clienteUpdate.setNome(dto.nome());
+        clienteUpdate.setCpf(dto.cpf());
+        clienteUpdate.setEmail(dto.email());
+        clienteUpdate.setNumeroRegistro_posse_porte(dto.registro());
 
-        List<Endereco> listaEnd = clienteUpdate.getListaEnderecos();
-        clienteUpdate.setListaEnderecos(listaEnd);
-
-        List<String> listaTel = clienteUpdate.getListaTelefones();
-        clienteUpdate.setListaTelefones(listaTel);
-        
-        if (clienteUpdate != null) {
-            clienteUpdate.setNome(dto.nome());
-            clienteUpdate.setCpf(dto.cpf());
-            clienteUpdate.setEmail(dto.email());
-            clienteUpdate.setNumeroRegistro_posse_porte(dto.registro());
-
-            clienteRepository.persist(clienteUpdate);
-        }
-
+        // Persistindo as alterações no banco de dados
+        clienteRepository.persist(clienteUpdate);
         return ClienteResponseDTO.valueOf(clienteUpdate);
     }
 
@@ -163,56 +137,22 @@ public class ClienteServiceImpl implements ClienteService {
                 .map(e -> ClienteResponseDTO.valueOf(e)).toList();
     }
 
-@Override
+    @Override
     public List<ClienteResponseDTO> findAll(int page, int pageSize) {
         List<Cliente> lista = clienteRepository
-                                    .findAll()
-                                    .page(page, pageSize)
-                                    .list();
+                .findAll()
+                .page(page, pageSize)
+                .list();
 
         return lista
-            .stream()
-            .map(e -> ClienteResponseDTO.valueOf(e))
-            .toList();
+                .stream()
+                .map(e -> ClienteResponseDTO.valueOf(e))
+                .toList();
     }
 
     @Override
     public ClienteResponseDTO findByUsuario(String login) {
         return ClienteResponseDTO.valueOf(clienteRepository.findByLogin(login));
-    }
-
-    @Override
-    @Transactional
-    public EnderecoResponseDTO insetEndereco(EnderecoDTO dto, Long id) {
-        Cliente cliente = clienteRepository.findById(id);
-        if (cliente == null) {
-            throw new ValidationException("cliente", "O Cliente " + cliente + " não encontrado, tente novamente.");
-        }
-
-        Endereco novoEndereco = new Endereco();
-        novoEndereco.setNome(dto.nome());
-        novoEndereco.setEstado(dto.estado());
-        novoEndereco.setCidade(dto.cidade());
-        novoEndereco.setLogradouro(dto.logradouro());
-        novoEndereco.setNumero(dto.numero());
-        novoEndereco.setBairro(dto.bairro());
-        novoEndereco.setComplemento(dto.complemento());
-        novoEndereco.setCep(dto.cep());
-        enderecoRepository.persist(novoEndereco);
-
-        cliente.getListaEnderecos().add(novoEndereco);
-
-        return EnderecoResponseDTO.valueOf(novoEndereco);
-    }
-
-    @Override
-    @Transactional
-    public String insetTelefone(String telefone, Long id) {
-        Cliente cliente = clienteRepository.findById(id);
-
-        cliente.getListaTelefones().add(telefone);
-
-        return telefone;
     }
 
     @Override

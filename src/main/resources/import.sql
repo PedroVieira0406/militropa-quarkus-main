@@ -1,11 +1,3 @@
--- This file allow to write SQL commands that will be emitted in test and dev.
--- The commands are commented as their support depends of the database
--- insert into myentity (id, field) values(1, 'field-1');
--- insert into myentity (id, field) values(2, 'field-2');
--- insert into myentity (id, field) values(3, 'field-3');
--- alter sequence myentity_seq restart with 4;
-
-
 INSERT INTO endereco(numero, cep, cidade, estado, logradouro, nome, bairro, complemento)
 VALUES 
     (123, '77000-000', 'Palmas', 'TO', 'Rua das Flores', 'Casa Azul', 'Centro', 'kitnet 4'),
@@ -28,19 +20,20 @@ insert into acabamento(
 values
 ('Nenhum'),('Ouro'),('Prata'),('Cobre'),('Madeira'),('Diamante'),('Chumbo'),('Almas'),('Desespero'),('Alegria'),('Sangue'),('Esmeralda'),('Platina');
 
+-- Atualizando tabela cliente para refletir a nova estrutura
 INSERT INTO cliente (
-    numeroregistro_posse_porte, cpf, nome, email, listatelefones
+    numeroregistro_posse_porte, cpf, nome, email, id_endereco
 )
 VALUES
-    ('1234567890', '111.111.111-11', 'André', 'andre@example.com', '{"1234567890", "9876543210"}'),
-    ('2345678901', '222.222.222-22', 'Bene', 'bene@example.com', '{"1234567891", "9876543211"}'),
-    ('3456789012', '333.333.333-33', 'Hirosh', 'hirosh@example.com', '{"1234567892", "9876543212"}'),
-    ('4567890123', '444.444.444-44', 'Heitor', 'heitor@example.com', '{"1234567893", "9876543213"}'),
-    ('5678901234', '555.555.555-55', 'Henrique', 'henrique@example.com', '{"1234567894", "9876543214"}'),
-    ('6789012345', '666.666.666-66', 'Junin', 'junin@example.com', '{"1234567895", "9876543215"}'),
-    ('7890123456', '777.777.777-77', 'Maria do Socorro', 'maria@example.com', '{"1234567896", "9876543216"}'),
-    ('8901234567', '888.888.888-88', 'Aline', 'aline@example.com', '{"1234567897", "9876543217"}'),
-    ('9012345678', '999.999.999-99', 'Fernanda', 'fernanda@example.com', '{"1234567898", "9876543218"}');
+    ('1234567890', '111.111.111-11', 'André', 'andre@example.com', 1),
+    ('2345678901', '222.222.222-22', 'Bene', 'bene@example.com', 2),
+    ('3456789012', '333.333.333-33', 'Hirosh', 'hirosh@example.com', 3),
+    ('4567890123', '444.444.444-44', 'Heitor', 'heitor@example.com', 4),
+    ('5678901234', '555.555.555-55', 'Henrique', 'henrique@example.com', 5),
+    ('6789012345', '666.666.666-66', 'Junin', 'junin@example.com', 6),
+    ('7890123456', '777.777.777-77', 'Maria do Socorro', 'maria@example.com', 7),
+    ('8901234567', '888.888.888-88', 'Aline', 'aline@example.com', 8),
+    ('9012345678', '999.999.999-99', 'Fernanda', 'fernanda@example.com', 9);
 
 INSERT INTO arma(
 	capacidadedetiro, preco, qtdnoestoque, tipoArma, modelo, numerosigma, comprimentodocano,
@@ -215,27 +208,6 @@ VALUES
     (1, 10),
     -- Funcionário Jacare
     (2, 11);
-
-INSERT INTO cliente_endereco (id_cliente, id_endereco)
-VALUES
-    -- Cliente André
-    (1, 1),
-    -- Cliente Bene
-    (2, 2),
-    -- Cliente Hirosh
-    (3, 3),
-    -- Cliente Heitor
-    (4, 4),
-    -- Cliente Henrique
-    (5, 5),
-    -- Cliente Junin
-    (6, 6),
-    -- Cliente Maria do Socorro
-    (7, 7),
-    -- Cliente Aline
-    (8, 8),
-    -- Cliente Fernanda
-    (9, 9);
 
 INSERT INTO funcionario_endereco (id_endereco, id_funcionario)
 VALUES

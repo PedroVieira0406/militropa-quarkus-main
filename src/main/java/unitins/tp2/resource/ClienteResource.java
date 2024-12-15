@@ -9,7 +9,6 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -21,7 +20,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
-import unitins.tp2.dto.endereco.EnderecoDTO;
 import unitins.tp2.service.cliente.ClienteService;
 import unitins.tp2.service.endereco.EnderecoServiceImpl;
 
@@ -64,37 +62,7 @@ public class ClienteResource {
         service.update(dto, idCliente);
         return Response.status(Status.NO_CONTENT).build();
     }
-
-    @PATCH
-    @Transactional
-//    @RolesAllowed({ "User"})
-    @Path("/insert-endereco")
-    public Response insertEndereco (EnderecoDTO dto){
-        String login = jwt.getSubject();
-        Long idCliente = service.findByUsuario(login).id();
-
-        Log.info("inserindo endereco: "+dto.nome()+" para: "+login);
-        service.insetEndereco(dto, idCliente);
-
-        return Response.status(Status.NO_CONTENT).build();
-    }
-
-    @PATCH
-    @Transactional
-//    @RolesAllowed({ "User"})
-    @Path("/insert-telefone")
-    public Response insertTelefone(String novoTelefone){
-        String login = jwt.getSubject();
-        Long idCliente = service.findByUsuario(login).id();
-
-        Log.info("inserindo Telefone: "+novoTelefone+" para: "+login);
-        service.insetTelefone(novoTelefone, idCliente);
-
-        return Response.status(Status.NO_CONTENT).build();
-    }
-
-
-
+    
     @DELETE
     @Transactional
 //    @RolesAllowed({ "Admin" })
