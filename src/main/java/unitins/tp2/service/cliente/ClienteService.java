@@ -5,6 +5,7 @@ import java.util.List;
 import unitins.tp2.dto.cliente.ClienteCadastroDTO;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
+import unitins.tp2.dto.usuario.UsuarioResponseDTO;
 
 public interface ClienteService {
 
@@ -25,4 +26,5 @@ public interface ClienteService {
 
     public long count();
 
+    public UsuarioResponseDTO login(String login, String senha);
 }

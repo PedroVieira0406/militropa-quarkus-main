@@ -12,4 +12,5 @@ public class EnderecoRepository implements PanacheRepository<Endereco> {
             return null;
         return find("UPPER (nome) LIKE?1","%" + nome.toUpperCase()+ "%") ;
     }
+    
 }

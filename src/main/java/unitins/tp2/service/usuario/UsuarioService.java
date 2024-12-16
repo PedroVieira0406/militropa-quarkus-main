@@ -2,10 +2,10 @@ package unitins.tp2.service.usuario;
 
 import java.util.List;
 
+import unitins.tp2.dto.usuario.AlterarLoginUsuarioDTO;
+import unitins.tp2.dto.usuario.AlterarSenhaUsuarioDTO;
 import unitins.tp2.dto.usuario.UsuarioDTO;
 import unitins.tp2.dto.usuario.UsuarioResponseDTO;
-import unitins.tp2.dto.usuario.alterarLoginUsuarioDTO;
-import unitins.tp2.dto.usuario.alterarSenhaUsuarioDTO;
 
 public interface UsuarioService {
 
@@ -13,8 +13,8 @@ public interface UsuarioService {
 
     public UsuarioResponseDTO update(UsuarioDTO dto, Long id);
 
-    public UsuarioResponseDTO alterarSenha(alterarSenhaUsuarioDTO alterarSenhaUsuarioDTO, String senha);
-    public UsuarioResponseDTO alterarLogin(alterarLoginUsuarioDTO alterarLoginUsuarioDTO, String login);
+    public void alterarSenha(AlterarSenhaUsuarioDTO dto);
+    public void alterarLogin(AlterarLoginUsuarioDTO dto);
 
     public void delete(Long id);
 

@@ -5,16 +5,18 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import io.quarkus.logging.Log;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import unitins.tp2.dto.usuario.alterarLoginUsuarioDTO;
-import unitins.tp2.dto.usuario.alterarSenhaUsuarioDTO;
+import jakarta.ws.rs.core.Response.Status;
+import unitins.tp2.dto.usuario.AlterarLoginUsuarioDTO;
+import unitins.tp2.dto.usuario.AlterarSenhaUsuarioDTO;
 import unitins.tp2.service.usuario.UsuarioService;
 
 @Path("/usuariologado")
@@ -39,27 +41,32 @@ public class UsuarioLogadoResource {
         Log.info("Pegando o usuário logado");
         return Response.ok(usuarioService.findByLogin(login)).build();
     }
-
-    @Path("/usuariologado/alterarsenha")
-    @PUT
-//    @RolesAllowed({"User", "Admin"})
-    public Response putInfos(alterarSenhaUsuarioDTO senhaUsuarioDTO){
-        String login = jwt.getSubject();
-        Log.info("Pegando o usuario logado string: " + login);
-        Log.info("Alterando a senha do usuário logado");
-        usuarioService.alterarSenha(senhaUsuarioDTO, login);
-        return Response.noContent().build();
+    @PATCH
+    @Path("/alterar-senha")
+    @RolesAllowed({"User"})
+    public Response alterarSenha(AlterarSenhaUsuarioDTO dto) {
+        try {
+            Log.info("Senha alterada com sucesso");
+            usuarioService.alterarSenha(dto);
+            return Response.status(Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            Log.error("Erro ao tentar alterar senha");
+            return Response.status(Status.NOT_FOUND).entity("Erro ao tentar alterar senha").build();
+        }
     }
 
-    @Path("/usuariologado/alterarlogin")
-    @PUT
-//    @RolesAllowed({"User", "Admin"})
-    public Response putInfos(alterarLoginUsuarioDTO loginUsuarioDTO){
-        String login = jwt.getSubject();
-        Log.info("Pegando o usuario logado string: " + login);
-        Log.info("Alterando o login do usuário logado");
-        usuarioService.alterarLogin(loginUsuarioDTO, login);
-        return Response.noContent().build();
+    @PATCH
+    @RolesAllowed({"User"})
+    @Path("/alterar-login")
+    public Response alterarLogin(AlterarLoginUsuarioDTO dto) {
+        try {
+            Log.info("Login alterado com sucesso.");
+            usuarioService.alterarLogin(dto);
+            return Response.status(Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            Log.error("Erro ao tentar alterar Login.", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao tentar alterar Login").build();
+        }
     }
 
 }

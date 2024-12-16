@@ -12,6 +12,7 @@ import jakarta.ws.rs.NotFoundException;
 import unitins.tp2.dto.cliente.ClienteCadastroDTO;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
+import unitins.tp2.dto.usuario.UsuarioResponseDTO;
 import unitins.tp2.model.Cliente;
 import unitins.tp2.model.Endereco;
 import unitins.tp2.model.Perfil;
@@ -182,4 +183,14 @@ public class ClienteServiceImpl implements ClienteService {
     public long count() {
         return clienteRepository.count();
     }
+
+        @Override
+    public UsuarioResponseDTO login(String login, String senha) {
+        Cliente cliente = clienteRepository.findByLoginAndSenha(login, senha);
+        if (cliente == null) {
+            throw new NullPointerException("cliente não encontrado - Executando ClienteServiceImpl_login");
+        }
+        return UsuarioResponseDTO.valueOf(cliente.getUsuario());
+    }
+
 }

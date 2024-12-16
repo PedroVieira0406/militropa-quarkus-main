@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
-import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
+import unitins.tp2.dto.usuario.AlterarLoginUsuarioDTO;
+import unitins.tp2.dto.usuario.AlterarSenhaUsuarioDTO;
 import unitins.tp2.dto.usuario.UsuarioDTO;
 import unitins.tp2.dto.usuario.UsuarioResponseDTO;
-import unitins.tp2.dto.usuario.alterarLoginUsuarioDTO;
-import unitins.tp2.dto.usuario.alterarSenhaUsuarioDTO;
 import unitins.tp2.model.Perfil;
 import unitins.tp2.model.Usuario;
 import unitins.tp2.repository.UsuarioRepository;
@@ -64,28 +63,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public UsuarioResponseDTO alterarSenha(alterarSenhaUsuarioDTO alterarSenhaUsuarioDTO, String login) {
-        Usuario usuario = repository.findByLogin(login);
-        Log.info("Senha antiga: "+ usuario.getSenha());
-        usuario.setSenha(hashService.getHashSenha(alterarSenhaUsuarioDTO.senha()));
-        Log.info("Senha nova: "+ usuario.getSenha());
-        Log.info("Senha alterada com sucesso!");
-        repository.persist(usuario);
+    public void alterarSenha(AlterarSenhaUsuarioDTO dto) {
+        Usuario usuario = repository.findById(Long.valueOf(jwt.getClaim("id").toString()));
 
-        return UsuarioResponseDTO.valueOf(usuario);
+        usuario.setSenha(hashService.getHashSenha(dto.senha()));
+        repository.persist(usuario);
     }
 
     @Override
     @Transactional
-    public UsuarioResponseDTO alterarLogin(alterarLoginUsuarioDTO alterarLoginUsuarioDTO, String login) {
-        Usuario usuario = repository.findByLogin(login);
-        Log.info("Login antigo: "+ usuario.getLogin());
-        usuario.setLogin(alterarLoginUsuarioDTO.login());
-        Log.info("Login novo: "+ usuario.getLogin());
-        Log.info("Login alterada com sucesso!");
-        repository.persist(usuario);
+    public void alterarLogin(AlterarLoginUsuarioDTO dto) {
 
-        return UsuarioResponseDTO.valueOf(usuario);
+        Usuario usuario = repository.findById(Long.valueOf(jwt.getClaim("id").toString()));
+
+        usuario.setLogin(dto.login());
+        repository.persist(usuario);
     }
 
 

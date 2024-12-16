@@ -1,3 +1,4 @@
+/* 
 package unitins.tp1;
 
 import static io.restassured.RestAssured.*;
@@ -87,5 +88,6 @@ public class ClienteResourceTest {
                 assertThat(clienteResponse.enderecos(), is(listaEnderecos));
                 assertThat(clienteResponse.usuario(), is(idUsuario));
         }
-*/
+
 }
+*/

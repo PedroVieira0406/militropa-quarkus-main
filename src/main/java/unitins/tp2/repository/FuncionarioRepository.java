@@ -9,13 +9,17 @@ import unitins.tp2.model.Funcionario;
 
 @ApplicationScoped
 public class FuncionarioRepository implements PanacheRepository<Funcionario> {
-public PanacheQuery<Funcionario> findByNome (String nome) {
-        if(nome == null)
+    public PanacheQuery<Funcionario> findByNome(String nome) {
+        if (nome == null)
             return null;
-        return find("UPPER (nome) LIKE?1","%" + nome.toUpperCase()+ "%") ;
+        return find("UPPER (nome) LIKE?1", "%" + nome.toUpperCase() + "%");
     }
 
     public List<Funcionario> findByMatricula(String matricula) {
         return find("UPPER(matricula) LIKE UPPER(?1) ", "%" + matricula + "%").list();
+    }
+
+    public Funcionario findByLoginAndSenha(String login, String senha) {
+        return find("usuario.login = ?1 AND usuario.senha = ?2", login, senha).firstResult();
     }
 }

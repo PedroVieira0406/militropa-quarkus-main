@@ -14,6 +14,7 @@ import unitins.tp2.model.Usuario;
 import unitins.tp2.repository.EnderecoRepository;
 import unitins.tp2.repository.FuncionarioRepository;
 import unitins.tp2.repository.UsuarioRepository;
+import unitins.tp2.dto.usuario.UsuarioResponseDTO;
 
 @ApplicationScoped
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -113,5 +114,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public long count() {
         return repository.count();
+    }
+
+    @Override
+    public UsuarioResponseDTO login(String login, String senha) {
+        Funcionario funcionario = repository.findByLoginAndSenha(login, senha);
+        return UsuarioResponseDTO.valueOf(funcionario.getUsuario());
     }
 }
