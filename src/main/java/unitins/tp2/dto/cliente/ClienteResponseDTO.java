@@ -19,7 +19,7 @@ public record ClienteResponseDTO(
                                 cliente.getNome(),
                                 cliente.getCpf(),
                                 cliente.getEmail(),
-                                cliente.getNumeroRegistro_posse_porte(),
+                                cliente.getNumeroRegistroPossePorte(),
                                 cliente.getEndereco() != null ? EnderecoResponseDTO.valueOf(cliente.getEndereco())
                                                 : null,
                                 UsuarioResponseDTO.valueOf(cliente.getUsuario()));

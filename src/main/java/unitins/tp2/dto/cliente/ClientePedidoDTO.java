@@ -15,7 +15,7 @@ public record ClientePedidoDTO(
                                 cliente.getId(),
                                 cliente.getNome(),
                                 cliente.getCpf(),
-                                cliente.getNumeroRegistro_posse_porte(),
+                                cliente.getNumeroRegistroPossePorte(),
                                 UsuarioResponseDTO.valueOf(cliente.getUsuario()));
         }
 }

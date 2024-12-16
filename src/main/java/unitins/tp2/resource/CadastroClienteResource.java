@@ -9,7 +9,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import unitins.tp2.dto.cliente.ClienteDTO;
+import unitins.tp2.dto.cliente.ClienteCadastroDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
 import unitins.tp2.service.cliente.ClienteService;
 
@@ -22,9 +22,9 @@ public class CadastroClienteResource {
     ClienteService service;
 
     @POST
-    public Response insert(@Valid ClienteDTO dto) {
+    public Response insert(@Valid ClienteCadastroDTO dto) {
         Log.info("Inserindo um cliente."+dto.login());
-        ClienteResponseDTO retorno = service.insert(dto);
+        ClienteResponseDTO retorno = service.insertCadastro(dto);
         return Response.status(201).entity(retorno).build();
     }
 }

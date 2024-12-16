@@ -22,7 +22,7 @@ values
 
 -- Atualizando tabela cliente para refletir a nova estrutura
 INSERT INTO cliente (
-    numeroregistro_posse_porte, cpf, nome, email, id_endereco
+    numeroregistroposseporte, cpf, nome, email, id_endereco
 )
 VALUES
     ('1234567890', '111.111.111-11', 'André', 'andre@example.com', 1),

@@ -60,6 +60,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
             funcionarioUpdate.setMatricula(dto.matricula());
             funcionarioUpdate.setTelefone(dto.telefone());
 
+            //já veio assim, vou nem mexer
             Endereco endereco = enderecoRepository.findById(dto.endereco());
             funcionarioUpdate.setEndereco(endereco);
             Usuario usuario = usuarioRepository.findById(dto.usuario());

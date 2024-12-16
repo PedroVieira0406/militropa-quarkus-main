@@ -2,12 +2,14 @@ package unitins.tp2.service.cliente;
 
 import java.util.List;
 
+import unitins.tp2.dto.cliente.ClienteCadastroDTO;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
 
 public interface ClienteService {
 
     public ClienteResponseDTO insert(ClienteDTO dto);
+    public ClienteResponseDTO insertCadastro(ClienteCadastroDTO dto);
 
     public ClienteResponseDTO update(ClienteDTO dto, Long id);
 

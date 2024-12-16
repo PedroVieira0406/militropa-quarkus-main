@@ -24,7 +24,7 @@ public class Cliente extends DefaultEntity {
     private String email;
 
     @Column(length = 10)
-    private String numeroRegistro_posse_porte;
+    private String numeroRegistroPossePorte;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_endereco")

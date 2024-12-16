@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
+import unitins.tp2.dto.cliente.ClienteCadastroDTO;
 import unitins.tp2.dto.cliente.ClienteDTO;
 import unitins.tp2.dto.cliente.ClienteResponseDTO;
 import unitins.tp2.model.Cliente;
@@ -25,6 +26,7 @@ import unitins.tp2.validation.ValidationException;
 public class ClienteServiceImpl implements ClienteService {
 
     @Inject
+    public
     ClienteRepository clienteRepository;
 
     @Inject
@@ -44,7 +46,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     @Transactional
-    public ClienteResponseDTO insert(ClienteDTO dto) {
+    public ClienteResponseDTO insertCadastro(ClienteCadastroDTO dto) {
         validarEmailCliente(dto.email());
         validarCpfCliente(dto.cpf());
         validarLoginCliente(dto.login());
@@ -53,7 +55,7 @@ public class ClienteServiceImpl implements ClienteService {
         novoCliente.setNome(dto.nome());
         novoCliente.setCpf(dto.cpf());
         novoCliente.setEmail(dto.email());
-        novoCliente.setNumeroRegistro_posse_porte(dto.registro());
+        novoCliente.setNumeroRegistroPossePorte(dto.registro());
 
         Endereco endereco = new Endereco();
         endereco.setNome(dto.enderecoNome());
@@ -81,21 +83,42 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     @Transactional
+    public ClienteResponseDTO insert(ClienteDTO dto) {
+        validarEmailCliente(dto.email());
+        validarCpfCliente(dto.cpf());
+
+        Cliente novoCliente = new Cliente();
+        novoCliente.setNome(dto.nome());
+        novoCliente.setCpf(dto.cpf());
+        novoCliente.setEmail(dto.email());
+        novoCliente.setNumeroRegistroPossePorte(dto.registro());
+
+        novoCliente.setUsuario(usuarioRepository.findById(dto.usuario()));
+
+        novoCliente.setEndereco(enderecoRepository.findById(dto.endereco()));
+
+        clienteRepository.persist(novoCliente);
+
+        return ClienteResponseDTO.valueOf(novoCliente);
+    }
+
+    @Override
+    @Transactional
     public ClienteResponseDTO update(ClienteDTO dto, Long id) {
-        Cliente clienteUpdate = clienteRepository.findById(id);
-        if (clienteUpdate == null) {
-            throw new NotFoundException("Cliente não encontrado");
-        }
+        Cliente clienteAtualizado = clienteRepository.findById(id);
 
-        // Atualizando os campos do cliente
-        clienteUpdate.setNome(dto.nome());
-        clienteUpdate.setCpf(dto.cpf());
-        clienteUpdate.setEmail(dto.email());
-        clienteUpdate.setNumeroRegistro_posse_porte(dto.registro());
+        clienteAtualizado.setNome(dto.nome());
+        clienteAtualizado.setCpf(dto.cpf());
+        clienteAtualizado.setEmail(dto.email());
+        clienteAtualizado.setNumeroRegistroPossePorte(dto.registro());
 
-        // Persistindo as alterações no banco de dados
-        clienteRepository.persist(clienteUpdate);
-        return ClienteResponseDTO.valueOf(clienteUpdate);
+        clienteAtualizado.setUsuario(usuarioRepository.findById(dto.usuario()));
+
+        clienteAtualizado.setEndereco(enderecoRepository.findById(dto.endereco()));
+
+        clienteRepository.persist(clienteAtualizado);
+
+        return ClienteResponseDTO.valueOf(clienteAtualizado);
     }
 
     @Override
