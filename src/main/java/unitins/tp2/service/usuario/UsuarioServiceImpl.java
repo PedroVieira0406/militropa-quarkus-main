@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -65,9 +66,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public void alterarSenha(AlterarSenhaUsuarioDTO dto) {
         Usuario usuario = repository.findById(Long.valueOf(jwt.getClaim("id").toString()));
-
-        usuario.setSenha(hashService.getHashSenha(dto.senha()));
-        repository.persist(usuario);
+        String senhaAtual = usuario.getSenha();
+        String senhaAntigaHash = hashService.getHashSenha(dto.senhaAntiga());
+    
+        if (senhaAtual.equals(senhaAntigaHash)) {
+            usuario.setSenha(hashService.getHashSenha(dto.senhaNova()));
+            repository.persist(usuario);
+        } else {
+            Log.info("Senha antiga incompatível");
+        }
     }
 
     @Override

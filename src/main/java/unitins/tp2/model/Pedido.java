@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,16 @@ import lombok.Setter;
 @Entity
 public class Pedido extends DefaultEntity {
 
-    private LocalDateTime dataHora;
-    private FormaDePagamento formaDePagamento;
-    private Status status;
+    private LocalDateTime dataPedido;
+
+    private Double valorTotal = 0.0;
+
+    private Boolean ifPedidoFeito = false;
+
+
+    @OneToOne
+    @JoinColumn(name = "id_formaPagamento", unique = true)
+    private FormaPagamento formaPagamento;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -27,7 +35,5 @@ public class Pedido extends DefaultEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_pedido")
     private List<ItemPedido> itens;
-
-    private Double totalPedido;
 
 }

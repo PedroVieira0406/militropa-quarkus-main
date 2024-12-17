@@ -8,14 +8,14 @@ import unitins.tp2.dto.pedido.PedidoResponseDTO;
 
 public interface PedidoService {
 
-        public PedidoResponseDTO insert(@Valid PedidoDTO dto, Long idCliente);
-        public PedidoResponseDTO findById(Long id);
-        public List<PedidoResponseDTO> findAll(int page, int pageSize);
-        public List<PedidoResponseDTO> findByCliente(Long idCliente);
-        public void delete(Long id);
-        public void alterarStatusPagamento(Long id);
-        public List<PedidoResponseDTO> meusPedidos();
-
-        public long count();
-    
-    }
+    public List<PedidoResponseDTO> findAll();
+    public PedidoResponseDTO findById(Long id);
+    public List<PedidoResponseDTO> findByCliente(Long idCliente);
+    public PedidoResponseDTO create(@Valid PedidoDTO dto);
+    public void cancelarPedido(Long idCliente);
+    public void finalizarPedido(Long idPedido);
+    public void pagamentoBoleto(Long idCliente);
+    public void pagamentoPix(Long idCliente);
+    boolean clienteAutenticado(String login, Long idCliente);
+    public List<PedidoResponseDTO> meusPedidos();
+}

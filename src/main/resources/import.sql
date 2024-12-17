@@ -154,7 +154,7 @@ VALUES
 INSERT INTO usuario (perfil, login, senha)
 VALUES 
 -- senha_cliente_andre
-    (1, 'cliente_andre', '/GOjHgpptfKVaR92/cXMp7sJi0raFpcUWzVNZj5jjwjx0Z/oi19lZx6/v+f6nOpnnYLb9fg9vGw8pUWW08ekUw=='),
+    (1, 'Vuasi999', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ=='),
 -- senha_cliente_bene
     (1, 'cliente_bene', 'tHg5Av764hOiw2peQgpDxMBsweO2HAsg4znQ5kxtcNMz/vPhKldRslxOL53tWghnqAQzna1E80x6CkNJbLT/kQ=='),
 -- senha_cliente_hirosh
@@ -176,9 +176,7 @@ VALUES
 -- senha_funcionario_jacare
     (2, 'funcionario_jacare', '/1TvZJJL/8eyuJ8ktCm35K2ShjAQYM9dPzdDUwU8Fk2S5UMQlZ+AJI6ruk/VRwEB+6LISFzdAOVVQvhl0Owc3w=='),
 --Vuasi666
-    (2, 'Vuasi666', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ=='),
---Vuasi999
-    (1, 'Vuasi999', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ==');
+    (2, 'Vuasi666', 'Ctis6fXh/t+HZ/rrRdKWoe+NFw5AQZTsz52vBgy8OHIAK3ZqtS/NIsgzcm4M5Gkrstv1hfjlAI9QRe/dAY+ijQ==');
 
 
 INSERT INTO cliente_usuario (id_cliente, id_usuario)

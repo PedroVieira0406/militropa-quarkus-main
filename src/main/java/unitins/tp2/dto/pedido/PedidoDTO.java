@@ -5,5 +5,6 @@ import unitins.tp2.dto.itemPedido.ItemPedidoDTO;
 
     public record PedidoDTO (
     List<ItemPedidoDTO> itens,
-    Integer formaDePagamento)
+    Integer formaDePagamento,
+    Long idCliente)
 { }

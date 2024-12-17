@@ -22,4 +22,12 @@ public class Produto extends DefaultEntity{
     @Column(length = 400)
     private String descricao;
 
+    public void diminuindoEstoque(Integer qtdNoEstoque) {
+        this.qtdNoEstoque -= qtdNoEstoque;
+    }
+
+    public void aumentandoEstoque(Integer qtdNoEstoque) {
+        this.qtdNoEstoque += qtdNoEstoque;
+    }
+
 }
